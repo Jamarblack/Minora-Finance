@@ -1,0 +1,42 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import logo from '../assets/logo.png';
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="absolute top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 md:py-8 z-50">
+      <Link  to="/" className="z-50 flex ">
+        <img src={logo} alt="Minora Finance Logo" className="h-8 md:h-10" />
+        <span className="font-bold text-xl">Minora Finance</span>
+      </Link>
+      
+      {/* Desktop Menu */}
+      <div className="hidden md:flex space-x-10 text-sm tracking-wide">
+        <Link to="/" className="font-semibold border-b border-black pb-1">Home</Link>
+        <Link to="/service" className="hover:text-gray-600 transition-colors uppercase">SERVICE</Link>
+        <Link to="/cart" className="hover:text-gray-600 transition-colors uppercase">Cart</Link>
+      </div>
+
+      {/* Mobile Hamburger Toggle */}
+      <button 
+        className="md:hidden z-50 text-black" 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle menu"
+      >
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="absolute top-0 left-0 w-full h-screen bg-[#f9f8f4] flex flex-col items-center justify-center space-y-8 md:hidden z-40">
+          <Link to="/" onClick={() => setIsOpen(false)} className="font-semibold text-2xl uppercase tracking-widest">Home</Link>
+          <Link to="/service" onClick={() => setIsOpen(false)} className="text-2xl uppercase tracking-widest hover:text-gray-600">Service</Link>
+          <Link to="/cart" onClick={() => setIsOpen(false)} className="text-2xl uppercase tracking-widest hover:text-gray-600">Cart</Link>
+        </div>
+      )}
+    </nav>
+  );
+}
