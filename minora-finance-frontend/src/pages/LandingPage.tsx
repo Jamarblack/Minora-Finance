@@ -1,18 +1,16 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import hero from '../assets/og-image.png';
 import about from '../assets/about.png';
 import todo from '../assets/todo.png';
 import vision from '../assets/vision.png';
-import logo from '../assets/logo.png'
 
 // Reusable animation variants to keep the code clean
-const fadeUpVariant = {
+const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -144,7 +142,7 @@ export default function LandingPage() {
             className="w-full md:w-1/2"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, delay: 0.2 }}
+            viewport={{ once: true }}
             variants={fadeUpVariant}
           >
             <h3 className="text-3xl md:text-4xl font-extrabold uppercase mb-6 border-b border-white/30 pb-4">Our Vision</h3>
