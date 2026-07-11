@@ -1,87 +1,121 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const  { cartCount } = useCart();
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-gray-100/70 top-0 w-full flex fixed justify-between items-center px-6 md:px-12 py-6 md:py-8 z-50">
-      <Link  to="/" className="z-50 flex ">
-        <img src={logo} alt="Minora Finance Logo" className="h-8 md:h-10" />
-        <span className="font-bold text-xl">Minora Finance</span>
+    <nav 
+      className={`fixed top-0 left-0 w-full z-50 flex justify-between border-b-2 border-b-[#5a2926] items-center px-6 md:px-12 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-4' : 'bg-[#f9f8f4]/90 py-6 md:py-8'
+      }`}
+    >
+      {/* BRAND & LOGO */}
+      <Link to="/" className="z-50 flex items-center gap-2">
+        <img src={logo} alt="Minora Financials Logo" className="h-8 md:h-10" />
+        <span className="font-bold text-xl">Minora Financials</span>
       </Link>
       
-      {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-10 text-sm tracking-wide">
-        <Link to="/" className="font-semibold border-b border-black pb-1">Home</Link>
-        <Link to="/service" className="hover:text-gray-600 transition-colors uppercase">SERVICE</Link>
-        <Link to="/cart" className="hover:text-gray-600 transition-colors uppercase">
-          Cart {cartCount > 0 && `(${cartCount})`}
+      {/* DESKTOP MENU */}
+      <div className="hidden md:flex items-center space-x-8 text-sm tracking-wide">
+        
+        <Link 
+          to="/" 
+          className={`font-semibold uppercase transition-colors ${
+            location.pathname === '/' ? 'text-[#d4af37] border-b-2 border-[#d4af37] pb-1' : 'hover:text-gray-600'
+          }`}
+        >
+          Home
         </Link>
+
+        <Link 
+          to="/about" 
+          className={`font-semibold uppercase transition-colors ${
+            location.pathname === '/about' ? 'text-[#d4af37] border-b-2 border-[#d4af37] pb-1' : 'hover:text-gray-600'
+          }`}
+        >
+          About
+        </Link>
+
+        <Link 
+          to="/assess" 
+          className={`font-semibold uppercase transition-colors ${
+            location.pathname === '/assess' ? 'text-[#d4af37] border-b-2 border-[#d4af37] pb-1' : 'hover:text-gray-600'
+          }`}
+        >
+          Assess
+        </Link>
+
+        {/* CTA BUTTON */}
+        <button 
+          onClick={() => navigate('/booking')}
+          className="bg-[#0a3028] text-white px-5 py-2.5 uppercase tracking-widest text-xs font-bold hover:bg-[#d4af37] transition-colors ml-4"
+        >
+          Book a Free Assessment
+        </button>
       </div>
 
-      {/* Mobile Hamburger Toggle */}
+      {/* MOBILE HAMBURGER TOGGLE */}
       <button 
         className="md:hidden z-50 text-black" 
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-     {/* Mobile Menu Overlay */}
+      {/* MOBILE MENU OVERLAY */}
       {isOpen && (
         <div className="fixed inset-0 w-full h-screen bg-[#f9f8f4] flex flex-col items-center justify-center space-y-8 md:hidden z-40">
-          <Link to="/" onClick={() => setIsOpen(false)} className="font-semibold text-2xl uppercase tracking-widest">
+          
+          <Link 
+            to="/" 
+            onClick={() => setIsOpen(false)} 
+            className={`font-semibold text-2xl uppercase tracking-widest ${location.pathname === '/' ? 'text-[#d4af37]' : 'text-black'}`}
+          >
             Home
           </Link>
-          <Link to="/service" onClick={() => setIsOpen(false)} className="text-2xl uppercase tracking-widest hover:text-gray-600">
-            Service
+
+          <Link 
+            to="/about" 
+            onClick={() => setIsOpen(false)} 
+            className={`font-semibold text-2xl uppercase tracking-widest ${location.pathname === '/about' ? 'text-[#d4af37]' : 'text-black'}`}
+          >
+            About
           </Link>
-          <Link to="/cart" onClick={() => setIsOpen(false)} className="text-2xl uppercase tracking-widest hover:text-gray-600">
-            Cart {cartCount > 0 && `(${cartCount})`}
+
+          <Link 
+            to="/assess" 
+            onClick={() => setIsOpen(false)} 
+            className={`font-semibold text-2xl uppercase tracking-widest ${location.pathname === '/assess' ? 'text-[#d4af37]' : 'text-black'}`}
+          >
+            Assess
           </Link>
+
+          <button 
+            onClick={() => {
+              setIsOpen(false);
+              navigate('/booking');
+            }}
+            className="bg-[#0a3028] text-white px-8 py-4 uppercase tracking-widest text-sm font-bold mt-4"
+          >
+            Book a Free Assessment
+          </button>
         </div>
       )}
     </nav>
   );
-}
-
-function useCart(): { cartCount: number } {
-  const [cartCount, setCartCount] = useState(0);
-
-  useEffect(() => {
-    const getCartCount = () => {
-      if (typeof window === 'undefined') {
-        return 0;
-      }
-
-      const storedCart = window.localStorage.getItem('cart');
-      if (!storedCart) {
-        return 0;
-      }
-
-      try {
-        const parsedCart = JSON.parse(storedCart);
-        if (Array.isArray(parsedCart)) {
-          return parsedCart.length;
-        }
-
-        if (parsedCart && Array.isArray(parsedCart.items)) {
-          return parsedCart.items.length;
-        }
-      } catch {
-        return 0;
-      }
-
-      return 0;
-    };
-
-    setCartCount(getCartCount());
-  }, []);
-
-  return { cartCount };
 }

@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#3e2723] text-white py-20 px-6 md:px-12 mt-auto">
+    <footer className="bg-[#5a2926] text-white py-20 px-6 md:px-12 mt-auto">
       <div className="flex flex-col md:flex-row justify-between w-full max-w-6xl mx-auto gap-12 md:gap-0">
         <div className="mb-10 md:mb-0 w-full md:w-1/2">
           <div className="flex items-center space-x-4 mb-10">

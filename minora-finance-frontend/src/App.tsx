@@ -5,6 +5,9 @@ import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import ServicePage from './pages/ServicePage';
 import CartPage from './pages/CartPage';
+import BookingPage from './pages/BookingPage';
+import AboutPage from './pages/AboutPage';
+import AssessPage from './pages/AssessPage';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/service" element={<ServicePage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/booking" element={<BookingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/assess" element={<AssessPage />} />
             </Routes>
           </main>
           <Footer />
