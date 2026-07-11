@@ -74,10 +74,10 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#0a3028]">
-            From Financial <br /> Confusion to <br /> Financial <span className="text-[#d4af37]">Freedom</span>
+            Build Confidence <br /> Grow Wealth <br /> shape  <span className="text-[#d4af37]"> your future</span>
           </h1>
           <p className="text-lg text-gray-700 mb-10 leading-relaxed font-serif max-w-lg">
-            We help individuals and families understand their finances, build confidence with money, and create lasting financial freedom through insurance, investments, and education.
+           Every financial decision you make today shapes the life you'll live tomorrow. At Minora Financials, we help you build wealth with confidence through personalized financial frameworks designed to support your goals today and a legacy tomorrow
           </p>
           
           <div className="flex flex-wrap items-center gap-4 mb-8">
@@ -128,7 +128,9 @@ export default function LandingPage() {
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Budget & Cash Flow Review</li>
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Investment & Debt Assessment</li>
               </ul>
-              <button className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors">Learn More</button>
+              <button 
+              onClick={() => navigate('/assess')}
+              className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors">Learn More</button>
             </motion.div>
 
             {/* EMPOWER */}
@@ -144,7 +146,9 @@ export default function LandingPage() {
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Investment Education</li>
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Workshops & Youth Programs</li>
               </ul>
-              <button className="border border-[#d4af37] text-[#d4af37] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#d4af37] hover:text-white transition-colors">Learn More</button>
+              <button 
+              onClick={() => navigate('/assess')}
+              className="border border-[#d4af37] text-[#d4af37] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#d4af37] hover:text-white transition-colors">Learn More</button>
             </motion.div>
 
             {/* FREEDOM */}
@@ -160,7 +164,12 @@ export default function LandingPage() {
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Segregated Funds</li>
                 <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Estate & Legacy Planning</li>
               </ul>
-              <button className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors">Learn More</button>
+              <button 
+                onClick={() => navigate('/assess')}
+                className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors"
+              >
+                Learn More
+              </button>
             </motion.div>
 
           </motion.div>
@@ -183,14 +192,13 @@ export default function LandingPage() {
               More Than Financial Advice—<br/>A Partnership for Life.
             </h2>
             <p className="font-serif text-gray-700 mb-4 leading-relaxed text-sm md:text-base">
-              I founded Minora Financials to help individuals and families—especially immigrants and young professionals—navigate the financial system with clarity and confidence.
+              I founded Minora Financials to help individuals and families especially immigrants and young professionals navigate the financial system with clarity and confidence.
             </p>
             <p className="font-serif text-gray-700 mb-8 leading-relaxed text-sm md:text-base">
               My mission is to educate, protect, and empower you to build wealth that creates choices, security, and a legacy for generations to come.
             </p>
-            <div className="font-mono text-xl text-gray-800 mb-1">Temi</div>
-            <div className="font-mono text-sm italic text-gray-800 mb-1"> Minora</div>
-            <div className="text-xs text-gray-500 uppercase tracking-widest">Financial Advisor</div>
+            <div className="font-mono text-xl text-gray-800 mb-1">Temi K</div>
+            <div className="font-mono text-sm italic text-gray-800 mb-1"> CEO Minora Financials</div>
           </motion.div>
 
           <motion.div variants={fadeUpVariant} className="w-full md:w-64 flex flex-col justify-center space-y-8 bg-white p-8 border border-gray-100 shadow-sm shrink-0">

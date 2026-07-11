@@ -40,9 +40,8 @@ export default function AboutPage() {
           </p>
           
           <div className="mt-4">
-            <div className="font-mono text-3xl italic text-gray-800 mb-1">Temi</div>
-            <div className="font-mono text-sm italic text-gray-800 mb-1">Minora</div>
-            <div className="text-xs text-gray-500 uppercase tracking-widest">Financial Advisor</div>
+           <div className="font-mono text-xl text-gray-800 mb-1">Temi K</div>
+            <div className="font-mono text-sm italic text-gray-800 mb-1"> CEO Minora Financials</div>
           </div>
         </motion.div>
 
@@ -180,7 +179,8 @@ export default function AboutPage() {
             <p className="font-serif text-lg leading-relaxed text-gray-800 mb-8">
               My goal is simple: to make finances less overwhelming and life more fulfilling.
             </p>
-            <p className="font-bold italic text-[#0a3028]">Temi</p>
+           <div className="font-mono text-xl text-gray-800 mb-1">Temi K</div>
+            <div className="font-mono text-sm italic text-gray-800 mb-1"> CEO Minora Financials</div>
           </motion.div>
 
         </div>
