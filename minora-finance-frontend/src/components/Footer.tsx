@@ -27,7 +27,6 @@ export default function Footer() {
           <div className="flex flex-col space-y-4">
             <h4 className="font-bold uppercase tracking-wider text-sm mb-2 text-gray-400">Follow</h4>
             <a href="https://www.instagram.com/minorafinancials/" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase underline decoration-1 underline-offset-4">Instagram</a>
-            <a href="https://twitter.com/minorafinancials" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase underline decoration-1 underline-offset-4">Twitter</a>
           </div>
         </div>
       </div>

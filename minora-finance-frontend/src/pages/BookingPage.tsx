@@ -21,7 +21,7 @@ export default function BookingPage() {
       {/* HEADER SECTION */}
       <section className="max-w-4xl mx-auto px-6 text-center mb-20">
         <motion.div initial="hidden" animate="visible" variants={fadeUpVariant}>
-          <h1 className="text-4xl md:text-5xl font-extrabold uppercase text-[#0a3028] tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold uppercase text-[#0a3028] tracking-tight mb-6 mt-10">
             Assess With Clarity. <br /> Plan With Purpose.
           </h1>
           <h2 className="text-xl md:text-2xl font-serif text-[#d4af37] mb-6">

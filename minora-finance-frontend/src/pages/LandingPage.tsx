@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { 
-  Search, BookOpen, Leaf, CheckCircle2, 
+  Search, BookOpen, Leaf, CheckCircle, 
   Users, Shield, BarChart3, Heart,
 } from 'lucide-react';
-import { motion, type Variants } from 'framer-motion';
+
 import homeHero from '../assets/minora-pic.jpg'; 
 import aboutTeaserImg from '../assets/about.png'; 
 import insurance from "../assets/insurance.png";
 import investing from "../assets/investing.png";
 import family from "../assets/family.png";
-import money from "../assets/money-tips.png"
+import money from "../assets/money-tips.png";
 
 const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -23,17 +25,50 @@ const staggerContainer: Variants = {
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  
+  // NOTE: State must be inside the component!
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const resourceArticles = [
+    {
+      id: 1,
+      category: "Insurance",
+      title: "Life Insurance 101: Protect What Matters Most",
+      image: insurance,
+      content: "Life insurance isn't just about leaving a legacy; it's about protecting your family's current standard of living. If the unexpected happens, the right coverage ensures your mortgage is paid, your children's education is funded, and your spouse isn't burdened with sudden debt. It is the foundation of any secure financial plan."
+    },
+    {
+      id: 2,
+      category: "Investing",
+      title: "TFSA vs RRSP: Which One Is Right for You?",
+      image: investing,
+      content: "This is the most common question in Canadian personal finance. An RRSP provides a tax deduction today, making it ideal for high-income earners saving for retirement. A TFSA doesn't give a tax break upfront, but your money grows completely tax-free and can be withdrawn anytime without penalty. Often, the best strategy utilizes both."
+    },
+    {
+      id: 3,
+      category: "Money Tips",
+      title: "7 Smart Money Habits for Young Professionals",
+      image: money,
+      content: "Building wealth starts with automation. By setting up automatic transfers to your savings and investment accounts every payday, you pay yourself first. Combine this with tracking your cash flow, building a 3-month emergency fund, and avoiding high-interest consumer debt, and you will put yourself years ahead of your peers."
+    },
+    {
+      id: 4,
+      category: "Family",
+      title: "Teaching Kids About Money: Start Early, Win Big",
+      image: family,
+      content: "Financial literacy starts at home. Introduce the concepts of earning, saving, and spending through a structured allowance system. As they get older, introduce the magic of compound interest. Children who learn to manage small amounts of money early on develop the discipline needed to handle larger wealth in adulthood."
+    }
+  ];
 
   return (
     <div className="w-full pt-20">
       
-      {/* 1. HERO SECTION (Text Left, Image Right) */}
+      {/* 1. HERO SECTION */}
       <section className="relative flex flex-col md:flex-row min-h-[90vh] bg-[#f9f8f4]">
         <motion.div 
           className="w-full md:w-1/2 flex flex-col justify-center p-8 md:p-16 lg:p-24 z-10"
           initial="hidden" animate="visible" variants={fadeUpVariant}
         >
-          {/* Script overlay from the mockup */}
           <div className="hidden lg:block absolute top-24 right-[45%] font-serif italic text-2xl text-gray-500 opacity-60 z-20">
             Plan today.<br/>Live tomorrow.<br/>Leave a legacy.
           </div>
@@ -58,20 +93,6 @@ export default function LandingPage() {
               Start Your Journey
             </button>
           </div>
-
-          {/* Trust Rating */}
-          {/* <div className="flex items-center gap-4 text-xs font-bold text-gray-600">
-            <span className="flex items-center gap-2"><Users size={16}/> Trusted by 300+ Families</span>
-            <span className="text-gray-300">|</span>
-            <span className="flex items-center gap-1 text-[#d4af37]">
-              <Star size={14} fill="currentColor" />
-              <Star size={14} fill="currentColor" />
-              <Star size={14} fill="currentColor" />
-              <Star size={14} fill="currentColor" />
-              <Star size={14} fill="currentColor" />
-            </span>
-            <span>5.0 Client Rating</span>
-          </div> */}
         </motion.div>
 
         <div className="w-full md:w-1/2 relative bg-cover bg-center min-h-[400px]" style={{ backgroundImage: `url(${homeHero})` }}>
@@ -79,13 +100,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 2. FRAMEWORK SECTION (3 Columns) */}
+      {/* 2. FRAMEWORK SECTION */}
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
             Our Framework
           </motion.h3>
-          <motion.h2 className="text-3xl md:text-5xl font-extrabold text-[#0a3028] mb-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
+          <motion.h2 className="text-4xl md:text-5xl font-extrabold text-[#0a3028] mb-4 tracking-tight" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
             Assess. Empower. Freedom.
           </motion.h2>
           <motion.p className="font-serif text-gray-600 mb-16 max-w-3xl mx-auto" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
@@ -96,57 +117,57 @@ export default function LandingPage() {
             
             {/* ASSESS */}
             <motion.div variants={fadeUpVariant} className="flex flex-col">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center shrink-0"><Search size={24} /></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center shrink-0"><Search size={28} strokeWidth={1.5} /></div>
                 <h4 className="text-2xl font-bold text-[#0a3028]">1. ASSESS</h4>
               </div>
               <p className="font-serif text-gray-600 mb-6 min-h-[60px]">We evaluate your current financial situation and create a personalized plan for your goals.</p>
-              <ul className="space-y-3 mb-8 text-sm text-gray-700 font-serif flex-grow">
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Financial Needs Analysis</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Insurance Review</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Budget & Cash Flow Review</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Investment & Debt Assessment</li>
+              <ul className="space-y-4 mb-8 text-sm text-gray-700 font-serif flex-grow">
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Financial Needs Analysis</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Insurance Review</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Budget & Cash Flow Review</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Investment & Debt Assessment</li>
               </ul>
-              <button className="border border-gray-300 text-gray-700 px-6 py-2 text-sm font-bold w-max hover:border-[#0a3028]">Learn More</button>
+              <button className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors">Learn More</button>
             </motion.div>
 
             {/* EMPOWER */}
             <motion.div variants={fadeUpVariant} className="flex flex-col">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-[#d4af37] text-white flex items-center justify-center shrink-0"><BookOpen size={24} /></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-[#d4af37] text-white flex items-center justify-center shrink-0"><BookOpen size={28} strokeWidth={1.5} /></div>
                 <h4 className="text-2xl font-bold text-[#d4af37]">2. EMPOWER</h4>
               </div>
               <p className="font-serif text-gray-600 mb-6 min-h-[60px]">We educate and equip you with the knowledge to make confident financial decisions.</p>
-              <ul className="space-y-3 mb-8 text-sm text-gray-700 font-serif flex-grow">
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Financial Education</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Insurance Literacy</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Investment Education</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Workshops & Youth Programs</li>
+              <ul className="space-y-4 mb-8 text-sm text-gray-700 font-serif flex-grow">
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Financial Education</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Insurance Literacy</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Investment Education</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Workshops & Youth Programs</li>
               </ul>
-              <button className="border border-[#d4af37] text-[#d4af37] px-6 py-2 text-sm font-bold w-max hover:bg-[#d4af37] hover:text-white transition-colors">Learn More</button>
+              <button className="border border-[#d4af37] text-[#d4af37] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#d4af37] hover:text-white transition-colors">Learn More</button>
             </motion.div>
 
             {/* FREEDOM */}
             <motion.div variants={fadeUpVariant} className="flex flex-col">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center shrink-0"><Leaf size={24} /></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center shrink-0"><Leaf size={28} strokeWidth={1.5} /></div>
                 <h4 className="text-2xl font-bold text-[#0a3028]">3. FREEDOM</h4>
               </div>
               <p className="font-serif text-gray-600 mb-6 min-h-[60px]">We help you build long-term wealth so you can live life on your terms.</p>
-              <ul className="space-y-3 mb-8 text-sm text-gray-700 font-serif flex-grow">
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Wealth Building</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Retirement Planning</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Segregated Funds</li>
-                <li className="flex items-start gap-3"><CheckCircle2 size={16} className="text-[#0a3028] shrink-0 mt-0.5"/> Estate & Legacy Planning</li>
+              <ul className="space-y-4 mb-8 text-sm text-gray-700 font-serif flex-grow">
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Wealth Building</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Retirement Planning</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Segregated Funds</li>
+                <li className="flex items-start gap-3"><CheckCircle size={18} className="text-[#0a3028] shrink-0 mt-0.5" strokeWidth={1.5}/> Estate & Legacy Planning</li>
               </ul>
-              <button className="border border-gray-300 text-gray-700 px-6 py-2 text-sm font-bold w-max hover:border-[#0a3028]">Learn More</button>
+              <button className="border border-[#0a3028] text-[#0a3028] px-6 py-2.5 text-sm font-bold w-max hover:bg-[#0a3028] hover:text-white transition-colors">Learn More</button>
             </motion.div>
 
           </motion.div>
         </div>
       </section>
 
-      {/* 3. ABOUT TEASER SECTION (Image Left, Text Center, Icons Right) */}
+      {/* 3. ABOUT TEASER SECTION */}
       <section className="relative flex flex-col lg:flex-row min-h-[80vh] bg-[#f9f8f4]">
         <div className="w-full lg:w-2/5 relative bg-cover bg-top min-h-[400px]" style={{ backgroundImage: `url(${aboutTeaserImg})` }}>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#f9f8f4]/40 to-[#f9f8f4]" />
@@ -156,7 +177,6 @@ export default function LandingPage() {
           className="w-full lg:w-3/5 flex flex-col md:flex-row p-8 lg:p-16 z-10 gap-12"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
         >
-          {/* Text block */}
           <motion.div variants={fadeUpVariant} className="flex-1">
             <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2">About Minora Financials</h3>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a3028] mb-6">
@@ -168,11 +188,11 @@ export default function LandingPage() {
             <p className="font-serif text-gray-700 mb-8 leading-relaxed text-sm md:text-base">
               My mission is to educate, protect, and empower you to build wealth that creates choices, security, and a legacy for generations to come.
             </p>
-            <div className="font-mono text-xl italic text-gray-800 mb-1">Rani Minora</div>
+            <div className="font-mono text-xl text-gray-800 mb-1">Temi</div>
+            <div className="font-mono text-sm italic text-gray-800 mb-1"> Minora</div>
             <div className="text-xs text-gray-500 uppercase tracking-widest">Financial Advisor</div>
           </motion.div>
 
-          {/* Icons Block */}
           <motion.div variants={fadeUpVariant} className="w-full md:w-64 flex flex-col justify-center space-y-8 bg-white p-8 border border-gray-100 shadow-sm shrink-0">
             <div className="flex items-center gap-4">
               <Users size={28} className="text-[#0a3028]" strokeWidth={1.5} />
@@ -220,8 +240,8 @@ export default function LandingPage() {
         </div>
       </section> */}
 
-      {/* 5. RESOURCES SECTION (Placeholder) */}
-      <section className="py-24 px-6 bg-white">
+      {/* 5. RESOURCES SECTION (Expandable) */}
+      <section className="py-24 px-6 bg-[#f9f8f4]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
@@ -229,40 +249,51 @@ export default function LandingPage() {
               <h2 className="text-3xl font-extrabold text-[#0a3028] mb-2">Knowledge Builds Confidence</h2>
               <p className="font-serif text-gray-600">Explore our latest articles and resources to help you make smarter financial decisions.</p>
             </motion.div>
-            <button className="hidden md:block border border-gray-300 text-gray-800 px-6 py-2 text-sm font-bold hover:border-[#0a3028]">
+            <button className="hidden md:block border border-gray-300 bg-white text-gray-800 px-6 py-2.5 text-sm font-bold hover:border-[#0a3028] transition-colors">
               Visit Resource Center
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {/* Mockup Blog Cards */}
-            <div className="border border-gray-100 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-40 bg-gray-200 mb-4 w-full"> <img src={insurance} alt="Insurance" className="w-full h-full object-cover" /> </div>
-              <p className="text-xs text-[#d4af37] font-bold uppercase mb-2">Insurance</p>
-              <h4 className="font-bold text-[#0a3028] mb-2 leading-tight">Life Insurance 101: Protect What Matters Most</h4>
-              <button className="text-xs text-gray-600 font-bold mt-2">Read More &rarr;</button>
-            </div>
-            <div className="border border-gray-100 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-40 bg-gray-200 mb-4 w-full"> <img src={investing} alt="Investing" className="w-full h-full object-cover" /> </div>
-              <p className="text-xs text-[#d4af37] font-bold uppercase mb-2">Investing</p>
-              <h4 className="font-bold text-[#0a3028] mb-2 leading-tight">TFSA vs RRSP: Which One Is Right for You?</h4>
-              <button className="text-xs text-gray-600 font-bold mt-2">Read More &rarr;</button>
-            </div>
-            <div className="border border-gray-100 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-40 bg-gray-200 mb-4 w-full"> <img src={money} alt="Money Tips" className="w-full h-full object-cover" /> </div>
-              <p className="text-xs text-[#d4af37] font-bold uppercase mb-2">Money Tips</p>
-              <h4 className="font-bold text-[#0a3028] mb-2 leading-tight">7 Smart Money Habits for Young Professionals</h4>
-              <button className="text-xs text-gray-600 font-bold mt-2">Read More &rarr;</button>
-            </div>
-            <div className="border border-gray-100 p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div className="h-40 bg-gray-200 mb-4 w-full"> <img src={family} alt="Family" className="w-full h-full object-cover" /> </div>
-              <p className="text-xs text-[#d4af37] font-bold uppercase mb-2">Family</p>
-              <h4 className="font-bold text-[#0a3028] mb-2 leading-tight">Teaching Kids About Money: Start Early, Win Big</h4>
-              <button className="text-xs text-gray-600 font-bold mt-2">Read More &rarr;</button>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+            {resourceArticles.map((article) => (
+              <div key={article.id} className="border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 bg-white flex flex-col h-full">
+                <div className="h-40 mb-6 w-full overflow-hidden bg-gray-100 rounded-sm"> 
+                  <img src={article.image} alt={article.category} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" /> 
+                </div>
+                
+                <p className="text-xs text-[#d4af37] font-bold uppercase tracking-wider mb-3">{article.category}</p>
+                <h4 className="text-lg font-extrabold text-[#0a3028] mb-4 leading-tight">{article.title}</h4>
+                
+                <AnimatePresence>
+                  {expandedCard === article.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                      animate={{ height: 'auto', opacity: 1, marginTop: 8 }}
+                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-sm font-serif text-gray-600 leading-relaxed mb-6">
+                        {article.content}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="mt-auto pt-2">
+                  <button 
+                    onClick={() => setExpandedCard(expandedCard === article.id ? null : article.id)}
+                    className="text-xs text-gray-800 font-bold hover:text-[#d4af37] transition-colors flex items-center gap-1"
+                  >
+                    {expandedCard === article.id ? 'Read Less' : 'Read More'} 
+                    <span className="text-[#d4af37] ml-1">{expandedCard === article.id ? '↑' : '→'}</span>
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
           
-          <button className="md:hidden mt-8 border border-gray-300 text-gray-800 px-6 py-2 text-sm font-bold w-full hover:border-[#0a3028]">
+          <button className="md:hidden mt-10 border border-gray-300 bg-white text-gray-800 px-6 py-3 text-sm font-bold w-full hover:border-[#0a3028] transition-colors">
             Visit Resource Center
           </button>
         </div>
