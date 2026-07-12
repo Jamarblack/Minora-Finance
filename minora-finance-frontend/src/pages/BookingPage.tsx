@@ -1,5 +1,9 @@
-import { motion, type Variants } from 'framer-motion';
-import { Search, ClipboardList, Target, Lightbulb, CheckCircle, Calendar, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { 
+  Search, ClipboardList, Target, Lightbulb, CheckCircle, 
+  Calendar, AlertCircle, X, Mail, User, ArrowRight, ShieldCheck, Loader2 
+} from 'lucide-react';
 
 const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -15,8 +19,45 @@ const staggerContainer: Variants = {
 };
 
 export default function BookingPage() {
+  // Modal & Form State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: formData.name, email: formData.email }),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        setFormData({ name: '', email: '' });
+      } else {
+        const data = await response.json();
+        alert(`Oops! ${data.error}`);
+      }
+    } catch (error) {
+      alert('Failed to connect. Please check your internet connection and try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    // Reset success state after closing so it's fresh if they open it again
+    setTimeout(() => setIsSuccess(false), 300); 
+  };
+
   return (
-    <div className="w-full bg-[#f9f8f4] min-h-screen pt-24 pb-20">
+    <div className="w-full bg-[#f9f8f4] min-h-screen pt-24 pb-20 relative">
       
       {/* HEADER SECTION */}
       <section className="max-w-4xl mx-auto px-6 text-center mb-20">
@@ -146,19 +187,18 @@ export default function BookingPage() {
             </p>
           </div>
 
-          {/* CALENDAR / INTAKE PLACEHOLDER */}
-          <div className="bg-[#0a3028] text-white p-10 text-center flex flex-col items-center">
+          {/* TRIGGER BUTTON AREA */}
+          <div className="bg-[#0a3028] text-white p-10 text-center flex flex-col items-center rounded-sm">
             <Calendar size={48} className="mb-4 text-[#d4af37]" />
             <h3 className="text-2xl font-bold uppercase mb-4">Ready to Get Clarity?</h3>
             <p className="font-serif mb-8 max-w-xl mx-auto">
               You will walk away with more clarity on what is working, what may be missing, and what actions may help you feel more financially confident.
             </p>
             
-            {/* 
-              TODO: This is where we will embed the Calendly or Squarespace booking widget 
-              For now, it's a placeholder button that could link to an external booking form
-            */}
-            <button className="bg-[#d4af37] text-[#0a3028] px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors w-full md:w-auto">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="bg-[#d4af37] text-[#0a3028] px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors w-full md:w-auto shadow-md"
+            >
               Book Your Free Assessment Now
             </button>
           </div>
@@ -170,6 +210,114 @@ export default function BookingPage() {
 
         </motion.div>
       </section>
+
+      {/* POPUP MODAL (FORM) */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a3028]/80 backdrop-blur-sm p-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-white max-w-md w-full rounded-sm shadow-2xl relative overflow-hidden"
+            >
+              {/* Close Button */}
+              <button 
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors z-10"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="p-8 md:p-10">
+                {isSuccess ? (
+                  <div className="flex flex-col items-center justify-center text-center py-8">
+                    <div className="w-16 h-16 bg-[#d4af37] rounded-full flex items-center justify-center mb-6 shadow-sm">
+                      <ShieldCheck size={32} className="text-[#0a3028]" />
+                    </div>
+                    <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-4">You're All Set!</h2>
+                    <p className="text-gray-600 font-serif leading-relaxed">
+                      Check your inbox. We have just sent you the link to book your 1-on-1 session with Temi.
+                    </p>
+                    <button 
+                      onClick={closeModal}
+                      className="mt-8 text-sm font-bold uppercase text-[#0a3028] hover:text-[#d4af37] transition-colors border-b-2 border-transparent hover:border-[#d4af37]"
+                    >
+                      Return to Website
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-2">Request Your Session</h2>
+                      <p className="text-sm font-serif text-gray-600">
+                        Enter your details below to receive your private booking link via email.
+                      </p>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      <div>
+                        <label htmlFor="name" className="block text-xs font-bold text-[#0a3028] mb-2 uppercase tracking-wider">First Name</label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <User size={18} className="text-gray-400" />
+                          </div>
+                          <input
+                            type="text"
+                            id="name"
+                            required
+                            className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
+                            placeholder="Enter your first name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="email" className="block text-xs font-bold text-[#0a3028] mb-2 uppercase tracking-wider">Email Address</label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <Mail size={18} className="text-gray-400" />
+                          </div>
+                          <input
+                            type="email"
+                            id="email"
+                            required
+                            className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
+                            placeholder="Enter your best email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="w-full bg-[#0a3028] text-white py-3.5 uppercase tracking-widest text-sm font-bold hover:bg-[#d4af37] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isLoading ? <Loader2 className="animate-spin" size={18} /> : 'Send Booking Link'} 
+                        {!isLoading && <ArrowRight size={18} />}
+                      </button>
+                    </form>
+
+                    <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 font-serif">
+                      <ShieldCheck size={14} className="text-[#d4af37]" />
+                      100% secure. We never share your data.
+                    </div>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
