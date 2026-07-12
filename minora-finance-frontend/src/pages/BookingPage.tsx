@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { 
   Search, ClipboardList, Target, Lightbulb, CheckCircle, 
-  Calendar, AlertCircle, X, Mail, User, ArrowRight, ShieldCheck, Loader2 
+  Calendar, AlertCircle, X, Mail, User, ArrowRight, ShieldCheck, Loader2, AlertTriangle 
 } from 'lucide-react';
 
 const fadeUpVariant: Variants = {
@@ -24,10 +24,12 @@ export default function BookingPage() {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // NEW: Error state
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setErrorMessage(''); // Clear previous errors on new submission
 
     try {
       const response = await fetch('/api/subscribe', {
@@ -41,10 +43,12 @@ export default function BookingPage() {
         setFormData({ name: '', email: '' });
       } else {
         const data = await response.json();
-        alert(`Oops! ${data.error}`);
+        // Set custom error instead of alert
+        setErrorMessage(data.error || 'Something went wrong. Please try again.');
       }
     } catch (error) {
-      alert('Failed to connect. Please check your internet connection and try again.');
+      // Set custom error instead of alert
+      setErrorMessage('Failed to connect. Please check your internet connection or API route and try again.');
     } finally {
       setIsLoading(false);
     }
@@ -52,8 +56,11 @@ export default function BookingPage() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    // Reset success state after closing so it's fresh if they open it again
-    setTimeout(() => setIsSuccess(false), 300); 
+    // Reset states after closing so it's fresh if they open it again
+    setTimeout(() => {
+      setIsSuccess(false);
+      setErrorMessage('');
+    }, 300); 
   };
 
   return (
@@ -76,62 +83,36 @@ export default function BookingPage() {
 
       {/* 5-STEP PROCESS SECTION */}
       <section className="max-w-7xl mx-auto px-6 mb-24">
-        <motion.div 
-          className="text-center mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUpVariant}
-        >
+        {/* ... (Keep your existing 5-step process UI exactly the same) ... */}
+        <motion.div className="text-center mb-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
           <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2">Our Assess Framework</h3>
           <h2 className="text-3xl font-extrabold uppercase text-[#0a3028]">A Clear 5-Step Process</h2>
           <p className="font-serif text-gray-600 mt-2">We go beyond numbers to understand your goals, your challenges, and your opportunities.</p>
         </motion.div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          {/* STEP 1 */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
           <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md">
-              <Search size={28} strokeWidth={1.5} />
-            </div>
+            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><Search size={28} strokeWidth={1.5} /></div>
             <h4 className="font-bold uppercase text-[#0a3028] mb-2">1. Discover</h4>
             <p className="text-sm font-serif text-gray-600">We learn about you—your life, goals, values, and what financial success looks like for you.</p>
           </motion.div>
-          {/* STEP 2 */}
           <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white">
-              <ClipboardList size={28} strokeWidth={1.5} />
-            </div>
+            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white"><ClipboardList size={28} strokeWidth={1.5} /></div>
             <h4 className="font-bold uppercase text-[#0a3028] mb-2">2. Analyze</h4>
             <p className="text-sm font-serif text-gray-600">We review your current financial situation, including income, expenses, assets, liabilities, and insurance.</p>
           </motion.div>
-          {/* STEP 3 */}
           <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md">
-              <Target size={28} strokeWidth={1.5} />
-            </div>
+            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><Target size={28} strokeWidth={1.5} /></div>
             <h4 className="font-bold uppercase text-[#0a3028] mb-2">3. Identify</h4>
             <p className="text-sm font-serif text-gray-600">We identify gaps, risks, and opportunities that may be holding you back from achieving your goals.</p>
           </motion.div>
-          {/* STEP 4 */}
           <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white">
-              <Lightbulb size={28} strokeWidth={1.5} />
-            </div>
+            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white"><Lightbulb size={28} strokeWidth={1.5} /></div>
             <h4 className="font-bold uppercase text-[#0a3028] mb-2">4. Strategize</h4>
             <p className="text-sm font-serif text-gray-600">We create personalized recommendations designed to strengthen your financial foundation.</p>
           </motion.div>
-          {/* STEP 5 */}
           <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md">
-              <CheckCircle size={28} strokeWidth={1.5} />
-            </div>
+            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><CheckCircle size={28} strokeWidth={1.5} /></div>
             <h4 className="font-bold uppercase text-[#0a3028] mb-2">5. Review & Prioritize</h4>
             <p className="text-sm font-serif text-gray-600">We walk you through your plan, answer your questions, and help you prioritize the next steps.</p>
           </motion.div>
@@ -140,33 +121,18 @@ export default function BookingPage() {
 
       {/* THE OFFER: FINANCIAL WELLNESS REVIEW */}
       <section className="max-w-5xl mx-auto px-6">
-        <motion.div 
-          className="bg-white p-8 md:p-12 shadow-xl border border-gray-100"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUpVariant}
-        >
+        <motion.div className="bg-white p-8 md:p-12 shadow-xl border border-gray-100" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold uppercase text-[#0a3028] mb-4">
-              Book Your Minora Financial Wellness Review
-            </h2>
-            <p className="text-lg font-serif text-gray-700 max-w-3xl mx-auto">
-              You work hard for your money. Now let’s make sure your money, income, family, and future are properly protected.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold uppercase text-[#0a3028] mb-4">Book Your Minora Financial Wellness Review</h2>
+            <p className="text-lg font-serif text-gray-700 max-w-3xl mx-auto">You work hard for your money. Now let’s make sure your money, income, family, and future are properly protected.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
             <div>
               <h3 className="text-xl font-bold uppercase text-[#d4af37] mb-4 border-b pb-2">What is it?</h3>
-              <p className="font-serif text-gray-700 mb-4">
-                The Minora Financial Wellness Review is a personalized 45-minute session designed for professionals and high-income families who want clarity, protection, and confidence in their financial life.
-              </p>
-              <p className="font-serif text-gray-700">
-                The goal is to help you understand what is working, what may be missing, and what steps you can take to protect your income, grow your money, and build financial confidence.
-              </p>
+              <p className="font-serif text-gray-700 mb-4">The Minora Financial Wellness Review is a personalized 45-minute session designed for professionals and high-income families who want clarity, protection, and confidence in their financial life.</p>
+              <p className="font-serif text-gray-700">The goal is to help you understand what is working, what may be missing, and what steps you can take to protect your income, grow your money, and build financial confidence.</p>
             </div>
-
             <div>
               <h3 className="text-xl font-bold uppercase text-[#d4af37] mb-4 border-b pb-2">This review is for you if:</h3>
               <ul className="space-y-3 font-serif text-gray-700">
@@ -191,10 +157,7 @@ export default function BookingPage() {
           <div className="bg-[#0a3028] text-white p-10 text-center flex flex-col items-center rounded-sm">
             <Calendar size={48} className="mb-4 text-[#d4af37]" />
             <h3 className="text-2xl font-bold uppercase mb-4">Ready to Get Clarity?</h3>
-            <p className="font-serif mb-8 max-w-xl mx-auto">
-              You will walk away with more clarity on what is working, what may be missing, and what actions may help you feel more financially confident.
-            </p>
-            
+            <p className="font-serif mb-8 max-w-xl mx-auto">You will walk away with more clarity on what is working, what may be missing, and what actions may help you feel more financially confident.</p>
             <button 
               onClick={() => setIsModalOpen(true)}
               className="bg-[#d4af37] text-[#0a3028] px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors w-full md:w-auto shadow-md"
@@ -207,7 +170,6 @@ export default function BookingPage() {
           <div className="mt-8 text-center text-xs text-gray-500 font-serif px-4">
             This session is not a full financial plan, legal advice, tax advice, or a guarantee of approval for any product or strategy. It is a starting point to help you understand your options and make informed decisions.
           </div>
-
         </motion.div>
       </section>
 
@@ -218,7 +180,7 @@ export default function BookingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a3028]/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a3028]/90 backdrop-blur-sm p-4"
           >
             <motion.div 
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -227,10 +189,7 @@ export default function BookingPage() {
               className="bg-white max-w-md w-full rounded-sm shadow-2xl relative overflow-hidden"
             >
               {/* Close Button */}
-              <button 
-                onClick={closeModal}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors z-10"
-              >
+              <button onClick={closeModal} className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors z-10">
                 <X size={24} />
               </button>
 
@@ -260,6 +219,21 @@ export default function BookingPage() {
                       </p>
                     </div>
 
+                    {/* CUSTOM ERROR BANNER */}
+                    <AnimatePresence>
+                      {errorMessage && (
+                        <motion.div 
+                          initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                          animate={{ opacity: 1, height: 'auto', marginBottom: 20 }}
+                          exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                          className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-sm text-sm flex items-start gap-3 font-serif"
+                        >
+                          <AlertTriangle size={18} className="shrink-0 mt-0.5 text-red-500" />
+                          <p>{errorMessage}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div>
                         <label htmlFor="name" className="block text-xs font-bold text-[#0a3028] mb-2 uppercase tracking-wider">First Name</label>
@@ -274,7 +248,10 @@ export default function BookingPage() {
                             className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
                             placeholder="Enter your first name"
                             value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            onChange={(e) => {
+                              setFormData({ ...formData, name: e.target.value });
+                              setErrorMessage(''); // Clear error when user types
+                            }}
                           />
                         </div>
                       </div>
@@ -292,7 +269,10 @@ export default function BookingPage() {
                             className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
                             placeholder="Enter your best email"
                             value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            onChange={(e) => {
+                              setFormData({ ...formData, email: e.target.value });
+                              setErrorMessage(''); // Clear error when user types
+                            }}
                           />
                         </div>
                       </div>
