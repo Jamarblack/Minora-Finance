@@ -27,7 +27,7 @@ export default function Navbar() {
       {/* BRAND & LOGO */}
       <Link to="/" className="z-50 flex items-center gap-2">
         <img src={logo} alt="Minora Financials Logo" className="h-8 md:h-10" />
-        <span className="font-bold text-xl">Minora Financials</span>
+        <span className="font-bold text-xl">MINORA FINANCIALS</span>
       </Link>
       
       {/* DESKTOP MENU */}
