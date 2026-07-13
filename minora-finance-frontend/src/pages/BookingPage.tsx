@@ -31,14 +31,13 @@ export default function BookingPage() {
         body: JSON.stringify({ name: formData.name, email: formData.email }),
       });
 
-      // Read the raw text first — this works whether the response is JSON or not,
-      // so we never crash trying to parse an HTML error page as JSON.
+      
       const rawText = await response.text();
       let data: { error?: string; message?: string } = {};
       try {
         data = rawText ? JSON.parse(rawText) : {};
       } catch {
-        // Response wasn't JSON at all (e.g. a 404 HTML page, or a Vercel platform error page)
+      
         console.error('Non-JSON response from /api/subscribe:', rawText.slice(0, 300));
       }
 
@@ -52,7 +51,7 @@ export default function BookingPage() {
         );
       }
     } catch (error) {
-      // This now only fires on a genuine network-level failure (e.g. DNS, CORS, offline)
+      
       console.error('Network-level fetch error:', error);
       setErrorMessage(
         error instanceof Error ? `Network error: ${error.message}` : 'Unknown network error.'
@@ -203,12 +202,12 @@ export default function BookingPage() {
               <div className="p-8 md:p-10">
                 {isSuccess ? (
                   <div className="flex flex-col items-center justify-center text-center py-8">
-                    <div className="w-16 h-16 bg-[#d4af37] rounded-full flex items-center justify-center mb-6 shadow-sm">
+                    <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center mb-6 shadow-sm">
                       <ShieldCheck size={32} className="text-[#0a3028]" />
                     </div>
                     <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-4">You're All Set!</h2>
                     <p className="text-gray-600 font-serif leading-relaxed">
-                      Check your inbox. We have just sent you the link to book your 1-on-1 session with Temi.
+                      Check your inbox (Promotions). We have just sent you the link to book your 1-on-1 session with Temi.
                     </p>
                     <button 
                       onClick={closeModal}
@@ -257,7 +256,7 @@ export default function BookingPage() {
                             value={formData.name}
                             onChange={(e) => {
                               setFormData({ ...formData, name: e.target.value });
-                              setErrorMessage(''); // Clear error when user types
+                              setErrorMessage('');     
                             }}
                           />
                         </div>
@@ -274,11 +273,11 @@ export default function BookingPage() {
                             id="email"
                             required
                             className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
-                            placeholder="Enter your best email"
+                            placeholder="youremail@example.com"
                             value={formData.email}
                             onChange={(e) => {
                               setFormData({ ...formData, email: e.target.value });
-                              setErrorMessage(''); // Clear error when user types
+                              setErrorMessage(''); 
                             }}
                           />
                         </div>
@@ -295,7 +294,7 @@ export default function BookingPage() {
                     </form>
 
                     <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 font-serif">
-                      <ShieldCheck size={14} className="text-[#d4af37]" />
+                      <ShieldCheck size={14} className="text-[#0f0c01]" />
                       100% secure. We never share your data.
                     </div>
                   </>
