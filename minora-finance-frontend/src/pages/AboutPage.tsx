@@ -33,7 +33,7 @@ export default function AboutPage() {
         >
           <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-4">About Minora Financials</h3>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-8 uppercase text-[#0a3028]">
-            More Than Financial Advice—<br/>A Partnership for Life.
+            More Than Financial Advice,<br/>A Partnership for Life.
           </h1>
           <p className="text-lg text-gray-800 mb-10 leading-relaxed font-serif">
             I believe everyone deserves clarity, confidence, and choices when it comes to their financial future. My mission is to make financial knowledge simple and accessible so you can build a life of security, freedom, and legacy.
@@ -84,13 +84,13 @@ export default function AboutPage() {
                 I came to Canada with big dreams, a strong work ethic, and the hope of building a better future. Like many immigrants, I worked hard, built my career, and focused on taking care of my family.
               </p>
               <p>
-                But no matter how much I earned, I realized something was missing—a clear financial plan, the right guidance, and the confidence to make decisions for my future.
+                But no matter how much I earned, I realized something was missing a clear financial plan, the right guidance, and the confidence to make decisions for my future.
               </p>
               <p>
-                I educated myself, learned the system, and discovered the power of financial planning. That journey changed my life—and it's the reason I started Minora Financials.
+                I educated myself, learned the system, and discovered the power of financial planning. That journey changed my life and it's the reason I started Minora Financials.
               </p>
               <p>
-                Now, I help individuals and families—especially immigrants and young professionals—navigate the financial system with clarity and confidence so they can build wealth, protect what matters, and create a legacy.
+                Now, I help individuals and families especially immigrants and young professionals navigate the financial system with clarity and confidence so they can build wealth, protect what matters, and create a legacy.
               </p>
             </motion.div>
           </motion.div>

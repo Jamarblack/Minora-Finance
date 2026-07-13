@@ -24,12 +24,12 @@ export default function BookingPage() {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); // NEW: Error state
+  const [errorMessage, setErrorMessage] = useState(''); 
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrorMessage(''); // Clear previous errors on new submission
+    setErrorMessage('');
 
     try {
       const response = await fetch('/api/subscribe', {
@@ -38,17 +38,32 @@ export default function BookingPage() {
         body: JSON.stringify({ name: formData.name, email: formData.email }),
       });
 
+      // Read the raw text first — this works whether the response is JSON or not,
+      // so we never crash trying to parse an HTML error page as JSON.
+      const rawText = await response.text();
+      let data: { error?: string; message?: string } = {};
+      try {
+        data = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        // Response wasn't JSON at all (e.g. a 404 HTML page, or a Vercel platform error page)
+        console.error('Non-JSON response from /api/subscribe:', rawText.slice(0, 300));
+      }
+
       if (response.ok) {
         setIsSuccess(true);
         setFormData({ name: '', email: '' });
       } else {
-        const data = await response.json();
-        // Set custom error instead of alert
-        setErrorMessage(data.error || 'Something went wrong. Please try again.');
+        setErrorMessage(
+          data.error ||
+            `Request failed (status ${response.status}). Check the console/network tab for details.`
+        );
       }
     } catch (error) {
-      // Set custom error instead of alert
-      setErrorMessage('Failed to connect. Please check your internet connection or API route and try again.');
+      // This now only fires on a genuine network-level failure (e.g. DNS, CORS, offline)
+      console.error('Network-level fetch error:', error);
+      setErrorMessage(
+        error instanceof Error ? `Network error: ${error.message}` : 'Unknown network error.'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -56,7 +71,7 @@ export default function BookingPage() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    // Reset states after closing so it's fresh if they open it again
+  
     setTimeout(() => {
       setIsSuccess(false);
       setErrorMessage('');
@@ -82,8 +97,7 @@ export default function BookingPage() {
       </section>
 
       {/* 5-STEP PROCESS SECTION */}
-      <section className="max-w-7xl mx-auto px-6 mb-24">
-        {/* ... (Keep your existing 5-step process UI exactly the same) ... */}
+      {/* <section className="max-w-7xl mx-auto px-6 mb-24">
         <motion.div className="text-center mb-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
           <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2">Our Assess Framework</h3>
           <h2 className="text-3xl font-extrabold uppercase text-[#0a3028]">A Clear 5-Step Process</h2>
@@ -117,7 +131,7 @@ export default function BookingPage() {
             <p className="text-sm font-serif text-gray-600">We walk you through your plan, answer your questions, and help you prioritize the next steps.</p>
           </motion.div>
         </motion.div>
-      </section>
+      </section> */}
 
       {/* THE OFFER: FINANCIAL WELLNESS REVIEW */}
       <section className="max-w-5xl mx-auto px-6">
@@ -146,7 +160,7 @@ export default function BookingPage() {
             </div>
           </div>
 
-          <div className="bg-[#f9f8f4] p-6 mb-10 border-l-4 border-[#d4af37]">
+          <div className="bg-[#f9f8f4] p-6 mb-10 border-l-4 border-t-4 border-[#d4af37]">
             <h3 className="font-bold uppercase text-[#0a3028] mb-3">During this review, we will discuss:</h3>
             <p className="font-serif text-gray-700 text-sm md:text-base leading-relaxed">
               Your income protection & coverages • Employer benefits • TFSA, RRSP, and RESP planning • Family responsibilities • Savings and investment goals • Debt and mortgage exposure • Beneficiary and legacy considerations • <strong>Your next best financial steps.</strong>

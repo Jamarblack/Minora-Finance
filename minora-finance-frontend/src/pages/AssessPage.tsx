@@ -80,7 +80,7 @@ export default function AssessPage() {
                 <Search size={32} strokeWidth={1.5}/>
               </div>
               <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">1. Discover</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We learn about you—your life, goals, values, and what financial success looks like for you.</p>
+              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We learn about you your life, goals, values, and what financial success looks like for you.</p>
               <ArrowRight className="hidden md:block absolute top-10 -right-6 text-[#d4af37]" strokeWidth={1} size={24} />
             </motion.div>
             
