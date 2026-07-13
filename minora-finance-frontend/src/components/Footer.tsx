@@ -22,7 +22,8 @@ export default function Footer() {
           <div className="flex flex-col space-y-4">
             <h4 className="font-bold uppercase tracking-wider text-sm mb-2 text-gray-400">Sitemap</h4>
             <Link to="/" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase">Home</Link>
-            <Link to="/service" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase">Service</Link>
+            <Link to="/about" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase">About</Link>
+            <Link to="/assess" className="font-serif text-sm opacity-80 hover:opacity-100 uppercase">Assess</Link>
           </div>
           <div className="flex flex-col space-y-4">
             <h4 className="font-bold uppercase tracking-wider text-sm mb-2 text-gray-400">Follow</h4>

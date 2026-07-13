@@ -17,7 +17,7 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+ 
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-50 flex justify-between border-b-2 border-b-[#5a2926] items-center px-6 md:px-12 transition-all duration-300 ${
