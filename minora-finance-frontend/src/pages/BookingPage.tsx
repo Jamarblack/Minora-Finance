@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { 
-  Search, ClipboardList, Target, Lightbulb, CheckCircle, 
   Calendar, AlertCircle, X, Mail, User, ArrowRight, ShieldCheck, Loader2, AlertTriangle 
 } from 'lucide-react';
 
@@ -10,13 +9,7 @@ const fadeUpVariant: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
+
 
 export default function BookingPage() {
   // Modal & Form State
