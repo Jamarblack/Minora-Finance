@@ -8,15 +8,15 @@ export default function Footer() {
         <div className="mb-10 md:mb-0 w-full md:w-1/2">
           <div className="flex items-center space-x-4 mb-10">
             <img src={logo} alt="Minora Finance Logo" className="h-10 md:h-12" />
-            <span className="text-2xl font-extrabold uppercase tracking-widest">Minora Financials</span>
+            <span className="text-2xl font-bold uppercase tracking-widest">Minora Financials</span>
           </div>
-          <h3 className="text-xl font-bold uppercase mb-4 text-gray-300">Subscribe</h3>
+          {/* <h3 className="text-xl font-bold uppercase mb-4 text-gray-300">Subscribe</h3>
           <p className="font-serif text-sm mb-6 opacity-80">Sign up with your email address to receive news and updates.</p>
           <form className="flex flex-col sm:flex-row gap-4">
             <input type="email" placeholder="Email Address" className="px-4 py-3 w-full sm:w-64 bg-white text-black font-serif outline-none" />
             <button type="submit" className="border border-white px-6 py-3 uppercase tracking-widest text-sm font-mono hover:bg-white hover:text-[#3e2723] transition-colors whitespace-nowrap">Sign Up</button>
           </form>
-          <p className="font-serif text-xs mt-6 opacity-60">We respect your privacy.</p>
+          <p className="font-serif text-xs mt-6 opacity-60">We respect your privacy.</p> */}
         </div>
         <div className="flex flex-row space-x-16 md:space-x-24">
           <div className="flex flex-col space-y-4">

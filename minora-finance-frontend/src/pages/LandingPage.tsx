@@ -87,11 +87,7 @@ export default function LandingPage() {
             >
               Book a Free Assessment
             </button>
-            <button 
-              className="border-2 border-gray-300 text-gray-800 px-8 py-3.5 font-bold hover:border-[#0a3028] transition-colors text-sm bg-white"
-            >
-              Start Your Journey
-            </button>
+
           </div>
         </motion.div>
 
