@@ -74,7 +74,7 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#0a3028]">
-            Build Confidence <br /> Grow Wealth <br /> shape  <span className="text-[#d4af37]"> your future</span>
+            Build Confidence, <br /> Grow Wealth, <br /> shape  <span className="text-[#d4af37]"> your future.</span>
           </h1>
           <p className="text-lg text-gray-700 mb-10 leading-relaxed font-serif max-w-lg">
            Every financial decision you make today shapes the life you'll live tomorrow. At Minora Financials, we help you build wealth with confidence through personalized financial frameworks designed to support your goals today and a legacy tomorrow
@@ -189,10 +189,10 @@ export default function LandingPage() {
           <motion.div variants={fadeUpVariant} className="flex-1">
             <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2">About Minora Financials</h3>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a3028] mb-6">
-              More Than Financial Advice—<br/>A Partnership for Life.
+              More Than Financial Advice:<br/>A Partnership for Life.
             </h2>
             <p className="font-serif text-gray-700 mb-4 leading-relaxed text-sm md:text-base">
-              I founded Minora Financials to help individuals and families especially immigrants and young professionals navigate the financial system with clarity and confidence.
+              I started Minora Financials to help you, especially professionals and business owners, navigate the financial system with clarity.
             </p>
             <p className="font-serif text-gray-700 mb-8 leading-relaxed text-sm md:text-base">
               My mission is to educate, protect, and empower you to build wealth that creates choices, security, and a legacy for generations to come.
@@ -222,31 +222,7 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* 4. STATISTICS BANNER (Dark Green) */}
-      {/* <section className="bg-[#0a3028] text-white py-12 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
-          <div className="flex flex-col items-center justify-center">
-            <Users size={32} className="mb-2 text-[#d4af37]" strokeWidth={1.5} />
-            <h4 className="text-2xl font-bold">300+</h4>
-            <p className="text-xs uppercase tracking-widest opacity-80 mt-1">Families Served</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <GraduationCap size={32} className="mb-2 text-[#d4af37]" strokeWidth={1.5} />
-            <h4 className="text-2xl font-bold">100+</h4>
-            <p className="text-xs uppercase tracking-widest opacity-80 mt-1">Workshops Delivered</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Shield size={32} className="mb-2 text-[#d4af37]" strokeWidth={1.5} />
-            <h4 className="text-2xl font-bold">10+</h4>
-            <p className="text-xs uppercase tracking-widest opacity-80 mt-1">Years of Experience</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Handshake size={32} className="mb-2 text-[#d4af37]" strokeWidth={1.5} />
-            <h4 className="text-2xl font-bold">100%</h4>
-            <p className="text-xs uppercase tracking-widest opacity-80 mt-1">Client Focused</p>
-          </div>
-        </div>
-      </section> */}
+     
 
       {/* 5. RESOURCES SECTION (Expandable) */}
       <section className="py-24 px-6 bg-[#f9f8f4]">
