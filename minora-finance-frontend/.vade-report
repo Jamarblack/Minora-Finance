@@ -1,0 +1,45 @@
+## Vercel Web Analytics Installation
+
+Successfully installed and configured Vercel Web Analytics for the Minora Finance React application.
+
+### Changes Made
+
+1. **Installed Dependencies**
+   - Added `@vercel/analytics` package (v2.0.1) to project dependencies
+   - Updated package.json with the new dependency
+   - Created package-lock.json to lock dependency versions
+
+2. **Integrated Analytics Component**
+   - Modified `src/App.tsx`:
+     - Imported `Analytics` component from `@vercel/analytics/react`
+     - Added `<Analytics />` component at the root level of the app (inside Router but outside the main content div)
+   - Followed official Vercel documentation for React integration
+
+### Implementation Details
+
+- **Framework**: React + Vite
+- **Integration Method**: Used React-specific import (`@vercel/analytics/react`)
+- **Component Placement**: Added Analytics component inside the Router component to ensure it tracks all route changes
+- **Documentation Source**: Fetched latest instructions from https://vercel.com/docs/analytics/quickstart
+
+### Verification Steps Completed
+
+✅ Package installation successful (no vulnerabilities)
+✅ Build completed successfully (no errors)
+✅ Linter passed (no new errors introduced)
+✅ All changes preserve existing code structure
+
+### Next Steps for Deployment
+
+To complete the setup:
+1. Deploy the application to Vercel
+2. Enable Web Analytics in the Vercel dashboard for this project
+3. After deployment, analytics data will automatically be collected and available in the Vercel dashboard
+
+### Files Modified
+
+- `package.json` - Added @vercel/analytics dependency
+- `package-lock.json` - New file with locked dependency versions
+- `src/App.tsx` - Added Analytics import and component
+
+No existing functionality was affected by these changes.
