@@ -1,9 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { 
-  Search, ClipboardList, Target, Lightbulb, CheckCircle, 
-  ClipboardCheck, Eye, ShieldAlert, Navigation, Heart, 
-  User, DollarSign, Shield, TrendingUp, Calendar, ArrowRight, 
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import assessHero from '../assets/minora-pic2.jpg'; 
 
@@ -20,10 +16,18 @@ const staggerContainer: Variants = {
 export default function AssessPage() {
   const navigate = useNavigate();
 
+  const processSteps = [
+    "Protection Review",
+    "Gap Summary",
+    "Recommendations",
+    "Implementation",
+    "Annual Review"
+  ];
+
   return (
-    <div className="w-full pt-20">
+    <div className="w-full pt-20 bg-[#f9f8f4]">
       
-      {/* 1. HERO SECTION (Text Left, Image Right) */}
+      {/* 1. HERO SECTION (Intact) */}
       <section className="relative flex flex-col md:flex-row min-h-[90vh] bg-[#f9f8f4]">
         <motion.div 
           className="w-full md:w-1/2 flex flex-col justify-center p-8 md:p-16 lg:p-24 z-10"
@@ -31,7 +35,6 @@ export default function AssessPage() {
         >
           <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-4">Step 1 Of Your Journey</h3>
           
-          {/* Highlighted text to match mockup */}
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 uppercase text-[#0a3028]">
             Assess With <span className="text-[#d4af37]">Clarity.</span><br /> 
             Plan With <span className="text-[#d4af37]">Purpose.</span>
@@ -48,9 +51,6 @@ export default function AssessPage() {
             >
               Start Your Assessment &rarr;
             </button>
-            {/* <span className="text-sm font-bold text-gray-600 flex items-center gap-2">
-              <Users size={18} className="text-gray-500" /> Trusted by 300+ Families
-            </span> */}
           </div>
         </motion.div>
 
@@ -59,211 +59,122 @@ export default function AssessPage() {
         </div>
       </section>
 
-      {/* 2. 5-STEP PROCESS & OUTCOME */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-4">Our Assess Framework</h3>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a3028] mb-4">
-              A Clear 5-Step Process to Understand Your Financial Picture
-            </h2>
-            <p className="text-gray-600 font-serif mb-16">We go beyond numbers to understand your goals, your challenges, and your opportunities.</p>
-          </motion.div>
-          
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-16 relative"
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          >
-            {/* Step 1 */}
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center relative">
-              <div className="w-20 h-20 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-6">
-                <Search size={32} strokeWidth={1.5}/>
-              </div>
-              <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">1. Discover</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We learn about you your life, goals, values, and what financial success looks like for you.</p>
-              <ArrowRight className="hidden md:block absolute top-10 -right-6 text-[#d4af37]" strokeWidth={1} size={24} />
-            </motion.div>
-            
-            {/* Step 2 */}
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center relative">
-              <div className="w-20 h-20 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-6">
-                <ClipboardList size={32} strokeWidth={1.5}/>
-              </div>
-              <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">2. Analyze</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We review your current financial situation, including income, expenses, assets, liabilities, insurance, and investments.</p>
-              <ArrowRight className="hidden md:block absolute top-10 -right-6 text-[#d4af37]" strokeWidth={1} size={24} />
-            </motion.div>
+      {/* 2. WE STAND BY ONE BELIEF (From Mockup) */}
+      <section className="py-24 px-6 md:px-16 lg:px-24 max-w-7xl mx-auto">
+        <motion.div 
+          className="relative"
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpVariant}
+        >
+          {/* Subtle accent text on the left mimicking the mockup's vertical text */}
+          <div className="hidden lg:block absolute -left-12 top-2 origin-top-left -rotate-90 text-[10px] tracking-[0.2em] text-gray-400 font-mono uppercase">
+          </div>
 
-            {/* Step 3 */}
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center relative">
-              <div className="w-20 h-20 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-6">
-                <Target size={32} strokeWidth={1.5}/>
-              </div>
-              <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">3. Identify</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We identify gaps, risks, and opportunities that may be holding you back from achieving your goals.</p>
-              <ArrowRight className="hidden md:block absolute top-10 -right-6 text-[#d4af37]" strokeWidth={1} size={24} />
-            </motion.div>
+          <h2 className="text-4xl md:text-5xl font-serif text-[#0a3028] mb-6">We stand by one belief</h2>
+          <p className="text-lg text-gray-700 font-sans max-w-3xl leading-relaxed mb-16">
+            If you spend a little time with us, you'll sleep a whole lot better. We evaluate your needs, manage your risk, educate you along the way, and check in every year to make sure you're still on track and still protected.
+          </p>
+        </motion.div>
 
-            {/* Step 4 */}
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center relative">
-              <div className="w-20 h-20 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-6">
-                <Lightbulb size={32} strokeWidth={1.5}/>
-              </div>
-              <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">4. Strategize</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We create personalized recommendations designed to strengthen your financial foundation.</p>
-              <ArrowRight className="hidden md:block absolute top-10 -right-6 text-[#d4af37]" strokeWidth={1} size={24} />
-            </motion.div>
-
-            {/* Step 5 */}
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-6">
-                <CheckCircle size={32} strokeWidth={1.5}/>
-              </div>
-              <h4 className="text-sm font-bold uppercase text-[#0a3028] mb-3">5. Review & Prioritize</h4>
-              <p className="text-xs font-serif text-gray-600 px-2 leading-relaxed">We walk you through your plan, answer your questions, and help you prioritize the next steps.</p>
-            </motion.div>
-          </motion.div>
-
-          {/* THE OUTCOME BANNER */}
-          <motion.div 
-            className="bg-[#fcfbf9] border border-[#d4af37]/30 py-5 px-8 rounded-md flex flex-col md:flex-row items-center justify-center gap-4 max-w-4xl mx-auto shadow-sm"
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}
-          >
-            <ClipboardCheck className="text-[#d4af37]" size={28} strokeWidth={1.5} />
-            <p className="text-sm text-gray-800">
-              <strong className="font-bold">The Outcome:</strong> Clarity, confidence, and a customized roadmap built around your life.
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
+        >
+          {/* Card 1 */}
+          <motion.div variants={fadeUpVariant} className="border border-[#e5e0d8] bg-white p-8 md:p-10 flex flex-col h-full shadow-sm">
+            <span className="text-xs font-mono text-gray-400 mb-6 block">01</span>
+            <h3 className="text-xl font-bold text-[#0a3028] mb-4">Security for your family</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Remove the burden of uncertainty with life, health, and financial protection built around your household.
             </p>
           </motion.div>
-        </div>
-      </section>
 
-      {/* 3. THE BENEFITS OF STARTING WITH ASSESS */}
-      <section className="py-24 px-6 bg-[#fcfbf9]">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>Why An Assessment Matters</motion.h3>
-          <motion.h2 className="text-3xl md:text-4xl font-extrabold text-[#0a3028] mb-16" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
-            The Benefits of Starting With Assess
-          </motion.h2>
-
-          <motion.div className="grid grid-cols-1 md:grid-cols-4 gap-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center text-center px-4">
-              <Eye className="text-[#d4af37] mb-4" size={40} strokeWidth={1} />
-              <h4 className="font-bold text-[#0a3028] mb-2">Gain Clarity</h4>
-              <p className="text-sm font-serif text-gray-600 leading-relaxed">See exactly where you stand financially.</p>
-            </motion.div>
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center text-center px-4">
-              <ShieldAlert className="text-[#d4af37] mb-4" size={40} strokeWidth={1} />
-              <h4 className="font-bold text-[#0a3028] mb-2">Reduce Risk</h4>
-              <p className="text-sm font-serif text-gray-600 leading-relaxed">Uncover hidden gaps that could cost you later.</p>
-            </motion.div>
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center text-center px-4">
-              <Navigation className="text-[#d4af37] mb-4" size={40} strokeWidth={1} />
-              <h4 className="font-bold text-[#0a3028] mb-2">Get Direction</h4>
-              <p className="text-sm font-serif text-gray-600 leading-relaxed">Receive a clear plan aligned with your goals.</p>
-            </motion.div>
-            <motion.div variants={fadeUpVariant} className="flex flex-col items-center text-center px-4">
-              <Heart className="text-[#d4af37] mb-4" size={40} strokeWidth={1} />
-              <h4 className="font-bold text-[#0a3028] mb-2">Build Confidence</h4>
-              <p className="text-sm font-serif text-gray-600 leading-relaxed">Make informed decisions with peace of mind.</p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 4. PROMPTS TO REFLECT */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>Prompts To Start Here</motion.h3>
-          <motion.h2 className="text-3xl md:text-4xl font-extrabold text-[#0a3028] mb-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
-            Take a Moment to Reflect
-          </motion.h2>
-          <motion.p className="font-serif text-gray-600 mb-16" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
-            These simple prompts will help you think about what matters most to you.
-          </motion.p>
-
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mb-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
-            <motion.div variants={fadeUpVariant} className="bg-white border border-[#f3eee5] p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full border border-[#d4af37] bg-white flex items-center justify-center mb-6">
-                <User size={24} strokeWidth={1} className="text-[#d4af37]" />
-              </div>
-              <p className="text-sm font-serif text-gray-700 leading-relaxed">What are your top financial priorities right now?</p>
-            </motion.div>
-            
-            <motion.div variants={fadeUpVariant} className="bg-white border border-[#f3eee5] p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full border border-[#d4af37] bg-white flex items-center justify-center mb-6">
-                <DollarSign size={24} strokeWidth={1} className="text-[#d4af37]" />
-              </div>
-              <p className="text-sm font-serif text-gray-700 leading-relaxed">Do you know how much you're saving (or losing) each month?</p>
-            </motion.div>
-            
-            <motion.div variants={fadeUpVariant} className="bg-white border border-[#f3eee5] p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full border border-[#d4af37] bg-white flex items-center justify-center mb-6">
-                <Shield size={24} strokeWidth={1} className="text-[#d4af37]" />
-              </div>
-              <p className="text-sm font-serif text-gray-700 leading-relaxed">Do you have the right insurance protection for you and your family?</p>
-            </motion.div>
-            
-            <motion.div variants={fadeUpVariant} className="bg-white border border-[#f3eee5] p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full border border-[#d4af37] bg-white flex items-center justify-center mb-6">
-                <TrendingUp size={24} strokeWidth={1} className="text-[#d4af37]" />
-              </div>
-              <p className="text-sm font-serif text-gray-700 leading-relaxed">Are your investments aligned with your goals and risk tolerance?</p>
-            </motion.div>
-            
-            <motion.div variants={fadeUpVariant} className="bg-white border border-[#f3eee5] p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full border border-[#d4af37] bg-white flex items-center justify-center mb-6">
-                <Heart size={24} strokeWidth={1} className="text-[#d4af37]" />
-              </div>
-              <p className="text-sm font-serif text-gray-700 leading-relaxed">What kind of life do you want to create for yourself and your family?</p>
-            </motion.div>
+          {/* Card 2 */}
+          <motion.div variants={fadeUpVariant} className="border border-[#e5e0d8] bg-white p-8 md:p-10 flex flex-col h-full shadow-sm">
+            <span className="text-xs font-mono text-gray-400 mb-6 block">02</span>
+            <h3 className="text-xl font-bold text-[#0a3028] mb-4">Growth on your terms</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              TFSA, RRSP, and RESP strategy that puts compound interest to work for your goals, not someone else's.
+            </p>
           </motion.div>
 
-          <p className="font-bold text-gray-800 text-sm md:text-base">Your answers are the first step toward a stronger financial future.</p>
-        </div>
+          {/* Card 3 */}
+          <motion.div variants={fadeUpVariant} className="border border-[#e5e0d8] bg-white p-8 md:p-10 flex flex-col h-full shadow-sm">
+            <span className="text-xs font-mono text-gray-400 mb-6 block">03</span>
+            <h3 className="text-xl font-bold text-[#0a3028] mb-4">Income protection</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Disability and critical illness coverage that reflects how you actually earn — employee or business owner.
+            </p>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* 5. READY TO GET CLARITY (Final CTA) */}
-      <section className="bg-white pb-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div 
-            className="bg-[#0a3028] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between text-white shadow-lg overflow-hidden relative"
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}
-          >
-            {/* Subtle decorative leaf accent */}
-            <div className="absolute -bottom-8 -right-8 opacity-20 pointer-events-none">
-               <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-            </div>
+      {/* 3. START WHERE YOU ARE (From Mockup) */}
+      <section className="py-16 px-6 md:px-16 lg:px-24 max-w-7xl mx-auto relative">
+        <motion.div 
+          className="relative"
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}
+        >
+          {/* Subtle accent text */}
+          <div className="hidden lg:block absolute -left-12 top-2 origin-top-left -rotate-90 text-[10px] tracking-[0.2em] text-gray-400 font-mono uppercase">
+          </div>
 
-            <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8 md:mb-0 relative z-10">
-              <div className="w-16 h-16 rounded-full bg-[#d4af37] flex items-center justify-center shrink-0">
-                <Calendar size={32} className="text-[#0a3028]" />
-              </div>
-              <div>
-                <h2 className="text-2xl md:text-3xl font-normal mb-2">Ready to Get Clarity?</h2>
-                <p className="font-serif text-sm text-gray-200">Book your free assessment and take the first step<br className="hidden md:block"/> toward financial confidence.</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col items-center md:items-end gap-3 shrink-0 relative z-10 w-full md:w-auto">
-              <button 
-                onClick={() => navigate('/booking')}
-                className="bg-[#d4af37] text-[#0a3028] px-8 py-3.5 text-sm font-bold hover:bg-white transition-colors w-full md:w-auto shadow-sm"
+          <h2 className="text-4xl md:text-5xl font-serif text-[#0a3028] mb-4">Start where you are</h2>
+          <p className="text-gray-600 font-sans mb-10">Not ready for a full review? Start with something small.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button 
+              onClick={() => navigate('/booking')}
+              className="bg-[#b79339] text-[#0a3028] px-8 py-4 text-sm font-bold hover:bg-[#0a3028] hover:text-white transition-colors"
+            >
+              Book a Financial Wellness Review
+            </button>
+            <button 
+              className="border border-gray-300 bg-transparent text-gray-700 px-8 py-4 text-sm font-bold hover:border-[#0a3028] hover:text-[#0a3028] transition-colors"
+            >
+              Get the Free Checklist
+            </button>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 4. HOW IT WORKS / FLOWCHART (From Mockup) */}
+      <section className="py-24 px-6 md:px-16 lg:px-24 max-w-7xl mx-auto border-t border-[#e5e0d8] mt-12 mb-20">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpVariant}>
+          <div className="hidden md:flex items-center gap-2 text-xs font-mono text-gray-500 mb-8 uppercase tracking-widest">
+            {processSteps.map((step, index) => (
+              <span key={`text-${index}`} className="flex items-center gap-2">
+                {step} {index !== processSteps.length - 1 && <ArrowRight size={12} />}
+              </span>
+            ))}
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-serif text-[#0a3028] mb-12">How it works</h2>
+        </motion.div>
+
+        <motion.div 
+          className="flex flex-col md:flex-row flex-wrap xl:flex-nowrap items-center gap-4 md:gap-2 lg:gap-4"
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
+        >
+          {processSteps.map((step, index) => (
+            <div key={`box-${index}`} className="flex flex-col md:flex-row items-center gap-4 md:gap-2 lg:gap-4 w-full md:w-auto">
+              <motion.div 
+                variants={fadeUpVariant} 
+                className="w-full md:w-auto border border-[#e5e0d8] bg-white px-6 py-5 text-sm font-sans text-gray-700 whitespace-nowrap text-center shadow-sm"
               >
-                Book a Free Assessment
-              </button>
-              <button className="text-xs text-gray-300 hover:text-white transition-colors flex items-center gap-1">
-                Or ask a question first &rarr;
-              </button>
+                {step}
+              </motion.div>
+              
+              {/* Arrow separator (hidden on the last item and hidden on mobile) */}
+              {index !== processSteps.length - 1 && (
+                <ArrowRight size={16} className="hidden md:block text-gray-400 shrink-0" />
+              )}
+              {/* Down arrow for mobile */}
+              {index !== processSteps.length - 1 && (
+                <ArrowRight size={16} className="md:hidden text-gray-400 shrink-0 rotate-90" />
+              )}
             </div>
-          </motion.div>
-
-          {/* TRUST INDICATORS FOOTER */}
-          {/* <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mt-12 text-gray-500 text-sm">
-            <div className="flex items-center gap-2"><Lock size={18} strokeWidth={1.5} /> 100% Confidential</div>
-            <div className="flex items-center gap-2"><User size={18} strokeWidth={1.5} /> No Obligation</div>
-            <div className="flex items-center gap-2"><Heart size={18} strokeWidth={1.5} /> Always in Your Best Interest</div>
-          </div> */}
-        </div>
+          ))}
+        </motion.div>
       </section>
 
     </div>

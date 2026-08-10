@@ -49,7 +49,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#f9f8f4] via-[#f9f8f4]/40 to-transparent" />
         </div>
       </section>
-
+''
       {/* 2. MY STORY SECTION (Image Left with Quote, Text Right) */}
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
@@ -211,11 +211,16 @@ export default function AboutPage() {
               onClick={() => navigate('/booking')}
               className="bg-[#d4af37] text-[#0a3028] px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors w-full md:w-auto"
             >
-              Book a Free Assessment
+              Get the Free Checklist
             </button>
-            <button className="text-sm font-serif text-gray-300 hover:text-white hover:underline">
-              Learn More About My Services &rarr;
-            </button>
+             <a 
+               href="https://calendly.com/minorafinancials/30min" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-xs md:text-sm font-bold text-white hover:text-[#d4af37] transition-colors border-b border-[#0a3028] hover:border-[#d4af37] inline-block self-center pb-0.5"
+                >
+                Learn More About My Services &rarr;
+                </a>
           </motion.div>
 
         </div>

@@ -74,7 +74,7 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#0a3028]">
-            Build Confidence, <br /> Grow Wealth, <br /> shape  <span className="text-[#d4af37]"> your future.</span>
+            You built the Income, <br /> Let’s make sure <br /> it’s protected <span className="text-[#d4af37]"> not just earned. </span>
           </h1>
           <p className="text-lg text-gray-700 mb-10 leading-relaxed font-serif max-w-lg">
            Every financial decision you make today shapes the life you'll live tomorrow. At Minora Financials, we help you build wealth with confidence through personalized financial frameworks designed to support your goals today and a legacy tomorrow
@@ -85,7 +85,7 @@ export default function LandingPage() {
               onClick={() => navigate('/booking')}
               className="bg-[#0a3028] text-white px-8 py-3.5 font-bold hover:bg-[#d4af37] transition-colors text-sm"
             >
-              Book a Free Assessment
+              Get the Free Checklist
             </button>
 
           </div>

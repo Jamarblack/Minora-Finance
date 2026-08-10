@@ -9,8 +9,6 @@ const fadeUpVariant: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-
-
 export default function BookingPage() {
   // Modal & Form State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +17,7 @@ export default function BookingPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState(''); 
 
- const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage('');
@@ -30,14 +28,12 @@ export default function BookingPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: formData.name, email: formData.email }),
       });
-
       
       const rawText = await response.text();
       let data: { error?: string; message?: string } = {};
       try {
         data = rawText ? JSON.parse(rawText) : {};
       } catch {
-      
         console.error('Non-JSON response from /api/subscribe:', rawText.slice(0, 300));
       }
 
@@ -51,7 +47,6 @@ export default function BookingPage() {
         );
       }
     } catch (error) {
-      
       console.error('Network-level fetch error:', error);
       setErrorMessage(
         error instanceof Error ? `Network error: ${error.message}` : 'Unknown network error.'
@@ -88,43 +83,6 @@ export default function BookingPage() {
         </motion.div>
       </section>
 
-      {/* 5-STEP PROCESS SECTION */}
-      {/* <section className="max-w-7xl mx-auto px-6 mb-24">
-        <motion.div className="text-center mb-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
-          <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-2">Our Assess Framework</h3>
-          <h2 className="text-3xl font-extrabold uppercase text-[#0a3028]">A Clear 5-Step Process</h2>
-          <p className="font-serif text-gray-600 mt-2">We go beyond numbers to understand your goals, your challenges, and your opportunities.</p>
-        </motion.div>
-
-        <motion.div className="grid grid-cols-1 md:grid-cols-5 gap-6 text-center" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
-          <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><Search size={28} strokeWidth={1.5} /></div>
-            <h4 className="font-bold uppercase text-[#0a3028] mb-2">1. Discover</h4>
-            <p className="text-sm font-serif text-gray-600">We learn about you—your life, goals, values, and what financial success looks like for you.</p>
-          </motion.div>
-          <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white"><ClipboardList size={28} strokeWidth={1.5} /></div>
-            <h4 className="font-bold uppercase text-[#0a3028] mb-2">2. Analyze</h4>
-            <p className="text-sm font-serif text-gray-600">We review your current financial situation, including income, expenses, assets, liabilities, and insurance.</p>
-          </motion.div>
-          <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><Target size={28} strokeWidth={1.5} /></div>
-            <h4 className="font-bold uppercase text-[#0a3028] mb-2">3. Identify</h4>
-            <p className="text-sm font-serif text-gray-600">We identify gaps, risks, and opportunities that may be holding you back from achieving your goals.</p>
-          </motion.div>
-          <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full border-2 border-[#0a3028] text-[#0a3028] flex items-center justify-center mb-4 shadow-md bg-white"><Lightbulb size={28} strokeWidth={1.5} /></div>
-            <h4 className="font-bold uppercase text-[#0a3028] mb-2">4. Strategize</h4>
-            <p className="text-sm font-serif text-gray-600">We create personalized recommendations designed to strengthen your financial foundation.</p>
-          </motion.div>
-          <motion.div variants={fadeUpVariant} className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-[#0a3028] text-white flex items-center justify-center mb-4 shadow-md"><CheckCircle size={28} strokeWidth={1.5} /></div>
-            <h4 className="font-bold uppercase text-[#0a3028] mb-2">5. Review & Prioritize</h4>
-            <p className="text-sm font-serif text-gray-600">We walk you through your plan, answer your questions, and help you prioritize the next steps.</p>
-          </motion.div>
-        </motion.div>
-      </section> */}
-
       {/* THE OFFER: FINANCIAL WELLNESS REVIEW */}
       <section className="max-w-5xl mx-auto px-6">
         <motion.div className="bg-white p-8 md:p-12 shadow-xl border border-gray-100" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariant}>
@@ -152,7 +110,7 @@ export default function BookingPage() {
             </div>
           </div>
 
-          <div className="bg-[#f9f8f4] p-6 mb-10 border-l-4 border-t-4 border-[#d4af37]">
+          <div className="bg-[#f9f8f4] p-6 mb-10 border-l-4 border-[#d4af37]">
             <h3 className="font-bold uppercase text-[#0a3028] mb-3">During this review, we will discuss:</h3>
             <p className="font-serif text-gray-700 text-sm md:text-base leading-relaxed">
               Your income protection & coverages • Employer benefits • TFSA, RRSP, and RESP planning • Family responsibilities • Savings and investment goals • Debt and mortgage exposure • Beneficiary and legacy considerations • <strong>Your next best financial steps.</strong>
@@ -168,7 +126,7 @@ export default function BookingPage() {
               onClick={() => setIsModalOpen(true)}
               className="bg-[#d4af37] text-[#0a3028] px-8 py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors w-full md:w-auto shadow-md"
             >
-              Book Your Free Assessment Now
+              Get the Free Checklist
             </button>
           </div>
 
@@ -202,12 +160,12 @@ export default function BookingPage() {
               <div className="p-8 md:p-10">
                 {isSuccess ? (
                   <div className="flex flex-col items-center justify-center text-center py-8">
-                    <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center mb-6 shadow-sm">
+                    <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center mb-6 shadow-sm border-2 border-[#d4af37]">
                       <ShieldCheck size={32} className="text-[#0a3028]" />
                     </div>
-                    <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-4">You're All Set!</h2>
+                    <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-4">Checklist Sent!</h2>
                     <p className="text-gray-600 font-serif leading-relaxed">
-                      Check your inbox (Promotions). We have just sent you the link to book your 1-on-1 session with Temi.
+                      Check your inbox (or Promotions folder). We have just sent you your free financial checklist.
                     </p>
                     <button 
                       onClick={closeModal}
@@ -219,9 +177,9 @@ export default function BookingPage() {
                 ) : (
                   <>
                     <div className="text-center mb-8">
-                      <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-2">Request Your Session</h2>
+                      <h2 className="text-2xl font-extrabold uppercase text-[#0a3028] mb-2">Get Your Free Checklist</h2>
                       <p className="text-sm font-serif text-gray-600">
-                        Enter your details below to receive your private booking link via email.
+                        Enter your details below and we'll send it straight to your inbox.
                       </p>
                     </div>
 
@@ -283,18 +241,30 @@ export default function BookingPage() {
                         </div>
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={isLoading}
-                        className="w-full bg-[#0a3028] text-white py-3.5 uppercase tracking-widest text-sm font-bold hover:bg-[#d4af37] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                      >
-                        {isLoading ? <Loader2 className="animate-spin" size={18} /> : 'Send Booking Link'} 
-                        {!isLoading && <ArrowRight size={18} />}
-                      </button>
+                      <div className="pt-2 flex flex-col gap-4 text-center">
+                        <button
+                          type="submit"
+                          disabled={isLoading}
+                          className="w-full bg-[#0a3028] text-white py-3.5 uppercase tracking-widest text-sm font-bold hover:bg-[#d4af37] transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-sm"
+                        >
+                          {isLoading ? <Loader2 className="animate-spin" size={18} /> : 'Send My Checklist'} 
+                          {!isLoading && <ArrowRight size={18} />}
+                        </button>
+                        
+                        {/* DIRECT CALENDLY LINK */}
+                        <a 
+                          href="https://calendly.com/minorafinancials/30min" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-xs md:text-sm font-bold text-[#0a3028] hover:text-[#d4af37] transition-colors border-b border-[#0a3028] hover:border-[#d4af37] inline-block self-center pb-0.5"
+                        >
+                          Or book a session now &rarr;
+                        </a>
+                      </div>
                     </form>
 
-                    <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 font-serif">
-                      <ShieldCheck size={14} className="text-[#0f0c01]" />
+                    <div className="mt-8 flex items-center justify-center gap-2 text-xs text-gray-500 font-serif">
+                      <ShieldCheck size={14} className="text-[#0a3028]" />
                       100% secure. We never share your data.
                     </div>
                   </>

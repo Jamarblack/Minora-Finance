@@ -60,6 +60,15 @@ export default function Navbar() {
           Assess
         </Link>
 
+         <Link 
+          to="/resousrces" 
+          className={`font-semibold uppercase transition-colors ${
+            location.pathname === '/resources' ? 'text-[#d4af37] border-b-2 border-[#d4af37] pb-1' : 'hover:text-gray-600'
+          }`}
+        >
+          Resources
+        </Link>
+
         {/* CTA BUTTON */}
         <button 
           onClick={() => navigate('/booking')}
@@ -104,6 +113,15 @@ export default function Navbar() {
           >
             Assess
           </Link>
+
+           <Link 
+            to="/resources" 
+            onClick={() => setIsOpen(false)} 
+            className={`font-semibold text-2xl uppercase tracking-widest ${location.pathname === '/resources' ? 'text-[#d4af37]' : 'text-black'}`}
+          >
+            Resources
+          </Link>
+
 
           <button 
             onClick={() => {
