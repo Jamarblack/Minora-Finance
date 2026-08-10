@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Analytics } from '@vercel/analytics/react';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -26,6 +25,7 @@ function App() {
               <Route path="/booking" element={<BookingPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/assess" element={<AssessPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
             </Routes>
           </main>
           <Footer />
