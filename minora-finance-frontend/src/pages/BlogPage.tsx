@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2 } from 'lucide-react';
-import logo from '../assets/logo.png';
 
 interface Post {
   id: string;
@@ -13,7 +12,7 @@ interface Post {
   created_at: string;
 }
 
-export default function ResourcesPage() {
+export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,7 +24,7 @@ export default function ResourcesPage() {
     const { data, error } = await supabase
       .from('posts')
       .select('id, title, slug, image_url, created_at')
-      .eq('published', true)
+      .eq('published', true) // ONLY fetch published posts
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -42,26 +41,23 @@ export default function ResourcesPage() {
         
         {/* Page Header */}
         <div className="text-center mb-16">
-          <div className=" text-[#d4af37] flex items-center justify-center  mx-auto mb-6">
-            <img src={logo} alt="minora logo" className="w-30 shadow-lg" />
-          </div>
-          <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-4">Minora Resources</h3>
+          <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4af37] mb-4">Minora Insights</h3>
           <h1 className="text-4xl md:text-5xl font-extrabold uppercase text-[#0a3028] tracking-tight mb-6">
-            Financial Resources <br className="hidden md:block" /> & Insights
+            Financial Clarity <br className="hidden md:block" /> & Education
           </h1>
           <p className="text-lg text-gray-600 font-serif max-w-2xl mx-auto">
-            Explore our latest articles, guides, and tools designed to help you protect your wealth and plan with purpose.
+            Explore our latest articles, guides, and insights designed to help you protect your wealth and plan with purpose.
           </p>
         </div>
 
-        {/* Resources Grid */}
+        {/* Blog Grid */}
         {isLoading ? (
           <div className="flex justify-center py-20">
             <Loader2 className="animate-spin text-[#0a3028]" size={40} />
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20 border border-[#e5e0d8] bg-white">
-            <p className="font-serif text-gray-500 text-lg">Check back soon for our first resource.</p>
+            <p className="font-serif text-gray-500 text-lg">Check back soon for our first article.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -101,10 +97,10 @@ export default function ResourcesPage() {
                     {post.title}
                   </h2>
                   
-                  {/* Notice this link now points to /resources */}
+                  {/* Push button to bottom */}
                   <div className="mt-auto pt-4 border-t border-gray-100">
                     <Link 
-                      to={`/resources/${post.slug}`}
+                      to={`/blog/${post.slug}`}
                       className="inline-flex items-center gap-2 text-sm font-bold text-[#d4af37] hover:text-[#0a3028] transition-colors uppercase tracking-widest"
                     >
                       Read Article <ArrowRight size={16} />

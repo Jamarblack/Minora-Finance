@@ -26,7 +26,7 @@ const staggerContainer: Variants = {
 export default function LandingPage() {
   const navigate = useNavigate();
   
-  // NOTE: State must be inside the component!
+  
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   const resourceArticles = [

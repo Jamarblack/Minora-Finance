@@ -61,7 +61,7 @@ export default function Navbar() {
         </Link>
 
          <Link 
-          to="/resousrces" 
+          to="/resources" 
           className={`font-semibold uppercase transition-colors ${
             location.pathname === '/resources' ? 'text-[#d4af37] border-b-2 border-[#d4af37] pb-1' : 'hover:text-gray-600'
           }`}

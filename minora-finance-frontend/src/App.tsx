@@ -9,6 +9,10 @@ import BookingPage from './pages/BookingPage';
 import AboutPage from './pages/AboutPage';
 import AssessPage from './pages/AssessPage';
 import ResourcesPage from './pages/ResourcesPage';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminPostEditor from './pages/AdminPostEditor';
+import SinglePostPage from './pages/SinglePostPage';
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
@@ -27,6 +31,10 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/assess" element={<AssessPage />} />
                 <Route path="/resources" element={<ResourcesPage />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/posts/new" element={<AdminPostEditor />} />
+                <Route path="/resources/:slug" element={<SinglePostPage />} />
+                <Route path="/admin" element={<AdminLogin />} />
               </Routes>
             </main>
             <Footer />
