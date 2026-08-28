@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Lock, Mail, Loader2, AlertTriangle } from 'lucide-react';
+import logo from "../assets/logo.png";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -37,8 +38,8 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-[#f9f8f4] flex items-center justify-center p-6">
       <div className="max-w-md w-full bg-white p-8 border border-gray-200 shadow-sm rounded-sm">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-[#0a3028] text-[#d4af37] rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock size={24} />
+          <div className=" text-[#d4af37]  flex items-center justify-center mx-auto mb-4">
+            <img src={logo} alt="Minora-logo" className="w-30 rounded-full  shadow-lg" />
           </div>
           <h1 className="text-2xl font-extrabold uppercase text-[#0a3028]">Admin Access</h1>
           <p className="text-sm font-serif text-gray-500 mt-2">Sign in to manage your blog posts.</p>
@@ -62,6 +63,7 @@ export default function AdminLogin() {
                 type="email"
                 required
                 className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
+                placeholder='admin@........'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -78,6 +80,7 @@ export default function AdminLogin() {
                 type="password"
                 required
                 className="w-full pl-12 pr-4 py-3 bg-[#f9f8f4] border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] outline-none transition-all font-serif text-sm"
+                placeholder='*******'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

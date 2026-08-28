@@ -79,7 +79,7 @@ export default function AdminPostEditor() {
       </nav>
 
       <main className="max-w-4xl mx-auto p-6 md:p-12">
-        <h1 className="text-3xl font-serif text-[#0a3028] mb-8">Create New Post</h1>
+        <h1 className="text-3xl font-serif text-[#0a3028] mb-8">Create New Article</h1>
 
         {error && (
           <div className="bg-red-50 text-red-700 p-4 mb-6 flex items-start gap-3 border border-red-200">
@@ -93,7 +93,7 @@ export default function AdminPostEditor() {
           {/* Title & Slug */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold text-[#0a3028] mb-2 uppercase">Post Title</label>
+              <label className="block text-xs font-bold text-[#0a3028] mb-2 uppercase">Article Title</label>
               <input
                 type="text"
                 required
@@ -104,7 +104,7 @@ export default function AdminPostEditor() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-[#0a3028] mb-2 uppercase">URL Slug (Auto-generated)</label>
+              <label className="block text-xs font-bold text-[#0a3028] mb-2 uppercase">Article-URL (Auto-generated)</label>
               <input
                 type="text"
                 required
@@ -160,7 +160,7 @@ export default function AdminPostEditor() {
             <button
               type="submit"
               disabled={isSaving}
-              className="bg-[#0a3028] text-white px-8 py-3 text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-[#d4af37] transition-colors disabled:opacity-70"
+              className="bg-[#0a3028] rounded-lg text-white px-8 py-3 text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-[#d4af37] transition-colors disabled:opacity-70"
             >
               {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
               {isSaving ? 'Saving...' : 'Save Post'}
